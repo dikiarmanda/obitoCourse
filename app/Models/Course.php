@@ -50,4 +50,9 @@ class Course extends Model
     {
         return $this->hasMany(CourseMentor::class, 'course_id');
     }
+
+    public function getContentCountAttribute()
+    {
+        return $this->courseSections->sum(fn($section) => $section->sectionContents->count());
+    }
 }
