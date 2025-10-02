@@ -35,6 +35,7 @@ class UserForm
                     ->required(),
                 Select::make('roles')
                     ->label('Role')
+                    ->multiple()
                     ->relationship('roles', 'name')
                     ->required(),
                 FileUpload::make('photo')
