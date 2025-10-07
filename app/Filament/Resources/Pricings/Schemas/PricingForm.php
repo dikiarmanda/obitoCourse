@@ -13,9 +13,6 @@ class PricingForm
         return $schema
             ->components([
                 Fieldset::make('Details')
-                    ->columns([
-                        'default' => 1,
-                    ])
                     ->schema([
                         TextInput::make('name')
                             ->maxLength(255)
