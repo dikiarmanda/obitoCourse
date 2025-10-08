@@ -32,20 +32,21 @@ class CourseForm
                             ->schema([
                                 TextInput::make('name')
                                     ->required(),
-                                Textarea::make('about')
-                                    ->required(),
-                                Select::make('is_popular')
-                                    ->options([
-                                        true => 'Popular',
-                                        false => 'Not Popular',
-                                    ])
-                                    ->required(),
-                                Select::make('category_id')
-                                    ->relationship('category', 'name')
-                                    ->searchable()
-                                    ->preload()
-                                    ->required(),
+                            ]),
+
+                        Textarea::make('about')
+                            ->required(),
+                        Select::make('is_popular')
+                            ->options([
+                                true => 'Popular',
+                                false => 'Not Popular',
                             ])
+                            ->required(),
+                        Select::make('category_id')
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
                     ]),
             ])
             ->columns(1);
