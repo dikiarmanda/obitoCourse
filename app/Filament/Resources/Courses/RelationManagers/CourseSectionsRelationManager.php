@@ -14,14 +14,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Actions\ForceDeleteBulkAction;
-use App\Filament\Resources\Courses\CourseResource;
 use Filament\Resources\RelationManagers\RelationManager;
 
 class CourseSectionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'courseSections';
-
-    // protected static ?string $relatedResource = CourseResource::class;
 
     public function form(Schema $schema): Schema
     {

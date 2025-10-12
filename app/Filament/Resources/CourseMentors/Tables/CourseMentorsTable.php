@@ -2,13 +2,15 @@
 
 namespace App\Filament\Resources\CourseMentors\Tables;
 
+use Filament\Tables\Table;
+use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\TrashedFilter;
-use Filament\Tables\Table;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class CourseMentorsTable
 {
@@ -16,7 +18,13 @@ class CourseMentorsTable
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('mentor.photo'),
+                TextColumn::make('mentor.name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('course.name')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 TrashedFilter::make(),
