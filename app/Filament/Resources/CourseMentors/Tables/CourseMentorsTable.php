@@ -18,7 +18,8 @@ class CourseMentorsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('mentor.photo'),
+                ImageColumn::make('mentor.photo')
+                    ->label('Photo'),
                 TextColumn::make('mentor.name')
                     ->sortable()
                     ->searchable(),
