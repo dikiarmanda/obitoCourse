@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Transactions\Schemas;
 
 use App\Models\Pricing;
+use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -101,9 +102,40 @@ class TransactionForm
                                 ]),
                         ]),
 
-                    Step::make('Delivery')
+                    Step::make('Customer Information')
                         ->schema([
-                            // ...
+                            Select::make('user_id')
+                                ->relationship('student', 'email')
+                                ->searchable()
+                                ->preload()
+                                ->required()
+                                ->live()
+                                ->afterStateUpdated(function ($state, callable $set) {
+                                    $user = User::find($state);
+                                    $name = $user->name;
+                                    $email = $user->email;
+                                    $set('name', $name);
+                                    $set('email', $email);
+                                })
+                                ->afterStateHydrated(function ($state, callable $set) {
+                                    $userId = $state;
+                                    if ($userId) {
+                                        $user = User::find($userId);
+                                        $name = $user->name;
+                                        $email = $user->email;
+                                        $set('name', $name);
+                                        $set('email', $email);
+                                    }
+                                }),
+                            TextInput::make('name')
+                                ->required()
+                                ->readOnly()
+                                ->maxLength(255),
+                            TextInput::make('email')
+                                ->required()
+                                ->email()
+                                ->readOnly()
+                                ->maxLength(255),
                         ]),
 
                     Step::make('Billing')
