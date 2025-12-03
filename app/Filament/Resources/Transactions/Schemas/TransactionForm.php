@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Transactions\Schemas;
 use App\Models\Pricing;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Grid;
@@ -138,9 +140,28 @@ class TransactionForm
                                 ->maxLength(255),
                         ]),
 
-                    Step::make('Billing')
+                    Step::make('Payment Information')
                         ->schema([
-                            // ...
+                            ToggleButtons::make('is_paid')
+                                ->label('Apakah Sudah Membayar?')
+                                ->boolean()
+                                ->grouped()
+                                ->icons([
+                                    'true' => 'heroicon-o-pencil',
+                                    'false' => 'heroicon-o-clock',
+                                ])
+                                ->required(),
+
+                            Select::make('payment_type')
+                                ->options([
+                                    'Midtrans' => 'Midtrans',
+                                    'Manual' => 'Manual',
+                                ])
+                                ->required(),
+
+                            FileUpload::make('proof')
+                                ->label('Bukti Pembayaran')
+                                ->image(),
                         ]),
                 ])
                     ->columnSpan('full')

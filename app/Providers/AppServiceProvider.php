@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Transaction;
+use App\Observers\TransactionObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::macro('toAppFormat', function () {
             return $this->format('d/m/Y');
         });
+
+        Transaction::observe(TransactionObserver::class);
     }
 }
