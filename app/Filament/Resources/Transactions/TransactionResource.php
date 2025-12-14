@@ -22,6 +22,8 @@ class TransactionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationGroup = 'Customers';
+
     public static function form(Schema $schema): Schema
     {
         return TransactionForm::configure($schema);

@@ -23,6 +23,8 @@ class CourseResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
 
+    protected static ?string $navigationGroup = 'Products';
+
     public static function form(Schema $schema): Schema
     {
         return CourseForm::configure($schema);
